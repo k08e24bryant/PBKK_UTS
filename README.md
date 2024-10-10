@@ -1,7 +1,7 @@
 # Aplikasi Calendar dengan CRUD Events dan FullCalendar.js
 
 **Link Video Presentasi:**
-wait
+[Link Presentasi](https://youtu.be/x4PLAThXInQ)
 
 **Anggota Kelompok:**
 - 5025221054 Chalvin Reza Farrel
@@ -49,6 +49,8 @@ Aplikasi ini menggunakan dua tabel utama:
    - `color`: Warna event yang dipilih oleh pengguna.
    - `calendar_id`: Relasi dengan tabel **calendars**.
 
+## Dokumentasi
+![image](https://github.com/user-attachments/assets/459e3ae7-79f7-4ce1-a3a0-abab4d5400d7)
 
 
 
