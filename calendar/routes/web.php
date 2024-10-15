@@ -4,14 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
+})->name('home');
+
+Route::get('/home', [EventController::class, 'dashboard'])->name('home');
+Route::get('/calendar', function () {
+    return view('calendar');
 });
-
-
+Route::get('/notes', function () {
+    return view('notes');
+});
 Route::get('/events', [EventController::class, 'index']);
-
-
 Route::post('/events', [EventController::class, 'store']);
-
-
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
