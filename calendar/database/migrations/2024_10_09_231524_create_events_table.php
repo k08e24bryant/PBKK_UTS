@@ -14,7 +14,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('start_time');
             $table->dateTime('end_time');
-            $table->string('category');
             $table->string('color')->default('#0000ff');
             $table->timestamps();
         });
