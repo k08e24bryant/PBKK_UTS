@@ -24,6 +24,26 @@ class EventController extends Controller
     return view('home', compact('events', 'recentNotes'));
     }
 
+    public function addNote(Request $request, $id)
+    {
+    $event = Event::findOrFail($id);
+
+    // Hitung jumlah catatan yang ada untuk event ini (untuk menambah index catatan)
+    $noteCount = $event->notes()->count();
+
+    // Buat catatan baru dengan judul "Catatan <nama agenda> <i>"
+    $note = new Note([
+        'title' => 'Catatan ' . $event->name . ' ' . ($noteCount + 1),
+        'content' => $request->input('content'),
+        'event_id' => $event->id
+    ]);
+
+    $note->save();
+
+    return response()->json(['success' => 'Catatan berhasil ditambahkan']);
+    }
+
+
 
     public function store(Request $request)
 {

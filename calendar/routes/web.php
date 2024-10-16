@@ -21,3 +21,5 @@ Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.de
 Route::get('/events', [EventController::class, 'index']);
 Route::post('/events', [EventController::class, 'store']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
+
+Route::post('/events/{id}/add-note', [EventController::class, 'addNote'])->name('events.add-note');

@@ -73,80 +73,102 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
 
-        // Event untuk menghapus agenda
+        // Event untuk mengklik agenda
         eventClick: function(info) {
-            if (confirm('Apakah kamu yakin ingin menghapus agenda ini?')) {
-                $.ajax({
-                    url: '/events/' + info.event.id,
-                    type: 'DELETE',
-                    data: { _token: '{{ csrf_token() }}' },
-                    success: function() {
-                        info.event.remove();  // Hapus langsung dari UI kalender
-                        alert('Agenda berhasil dihapus');
-                    },
-                    error: function() {
-                        alert('Terjadi kesalahan saat menghapus agenda');
-                    }
-                });
+            // Menampilkan pilihan untuk hapus atau tambahkan catatan
+            var action = prompt('Ketik "delete" untuk menghapus atau "note" untuk menambahkan catatan ke event ini:');
+
+            if (action === 'delete') {
+                if (confirm('Apakah Anda yakin ingin menghapus agenda ini?')) {
+                    $.ajax({
+                        url: '/events/' + info.event.id,
+                        type: 'DELETE',
+                        data: { _token: '{{ csrf_token() }}' },
+                        success: function() {
+                            info.event.remove();  // Hapus langsung dari UI kalender
+                            alert('Agenda berhasil dihapus');
+                        },
+                        error: function() {
+                            alert('Terjadi kesalahan saat menghapus agenda');
+                        }
+                    });
+                }
+            } else if (action === 'note') {
+                // Jika pengguna memilih untuk menambahkan catatan
+                var noteContent = prompt('Masukkan isi catatan:');
+                if (noteContent) {
+                    $.ajax({
+                        url: '/events/' + info.event.id + '/add-note',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            content: noteContent
+                        },
+                        success: function(response) {
+                            alert('Catatan berhasil ditambahkan');
+                        },
+                        error: function(xhr) {
+                            alert('Terjadi kesalahan saat menambahkan catatan');
+                        }
+                    });
+                }
             }
         }
     });
 
     // Konfirmasi kategori setelah memilih event
-submitCategoryButton.addEventListener('click', function () {
-    var selectedCategory = categorySelect.value;
+    submitCategoryButton.addEventListener('click', function () {
+        var selectedCategory = categorySelect.value;
 
-    if (!selectedCategory) {
-        alert('Pilih kategori terlebih dahulu');
-        return;
-    }
+        if (!selectedCategory) {
+            alert('Pilih kategori terlebih dahulu');
+            return;
+        }
 
-    var eventColor = categoryColors[selectedCategory];
+        var eventColor = categoryColors[selectedCategory];
 
-    console.log({
-        name: selectedEventInfo.name,
-        description: selectedEventInfo.description,
-        start_time: selectedEventInfo.start_time,
-        end_time: selectedEventInfo.end_time,
-        category: selectedCategory,
-        color: eventColor
-    });
-
-    $.ajax({
-        url: '/events',
-        type: 'POST',
-        data: {
+        console.log({
             name: selectedEventInfo.name,
             description: selectedEventInfo.description,
             start_time: selectedEventInfo.start_time,
             end_time: selectedEventInfo.end_time,
             category: selectedCategory,
-            color: eventColor,
-            _token: '{{ csrf_token() }}'
-        },
-        success: function (response) {
-            console.log('Response:', response);
-            calendar.addEvent({
-                id: response.id,
-                title: selectedEventInfo.name,
-                start: selectedEventInfo.start_time,
-                end: selectedEventInfo.end_time,
-                backgroundColor: eventColor
-            });
+            color: eventColor
+        });
 
-            alert('Agenda berhasil ditambahkan');
-        },
-        error: function (xhr) {
-            console.log('Error:', xhr.responseText);
-            alert('Terjadi kesalahan saat menambahkan agenda');
-        }
+        $.ajax({
+            url: '/events',
+            type: 'POST',
+            data: {
+                name: selectedEventInfo.name,
+                description: selectedEventInfo.description,
+                start_time: selectedEventInfo.start_time,
+                end_time: selectedEventInfo.end_time,
+                category: selectedCategory,
+                color: eventColor,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (response) {
+                console.log('Response:', response);
+                calendar.addEvent({
+                    id: response.id,
+                    title: selectedEventInfo.name,
+                    start: selectedEventInfo.start_time,
+                    end: selectedEventInfo.end_time,
+                    backgroundColor: eventColor
+                });
+
+                alert('Agenda berhasil ditambahkan');
+            },
+            error: function (xhr) {
+                console.log('Error:', xhr.responseText);
+                alert('Terjadi kesalahan saat menambahkan agenda');
+            }
+        });
+
+        categoryContainer.style.display = 'none'; // Sembunyikan form kategori
+        categorySelect.value = ''; // Reset kategori
     });
-
-    categoryContainer.style.display = 'none'; // Sembunyikan form kategori
-    categorySelect.value = ''; // Reset kategori
-});
-
-    
 
     calendar.render();
 });

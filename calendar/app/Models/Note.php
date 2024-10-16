@@ -11,4 +11,9 @@ class Note extends Model
 
     // Tambahkan title dan content ke $fillable
     protected $fillable = ['title', 'content'];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

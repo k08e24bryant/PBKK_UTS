@@ -12,6 +12,11 @@ class Event extends Model
     protected $fillable = [
         'name', 'description', 'start_time', 'end_time', 'category', 'color'
     ];
+    
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }
 
 
