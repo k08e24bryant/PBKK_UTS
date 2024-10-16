@@ -18,7 +18,6 @@ Route::get('/notes/{id}/edit', [NoteController::class, 'edit'])->name('notes.edi
 Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update');
 Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy');
 
-// Route Event
 Route::get('/events', [EventController::class, 'index']);
 Route::post('/events', [EventController::class, 'store']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
