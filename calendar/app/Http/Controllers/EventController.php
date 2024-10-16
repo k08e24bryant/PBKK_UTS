@@ -11,13 +11,16 @@ class EventController extends Controller
 {
     public function dashboard()
     {
-        // Ambil semua event dan urutkan berdasarkan tanggal
-        $events = Event::orderBy('start_time')->get();
+    // Ambil semua event dan urutkan berdasarkan tanggal
+    $events = Event::orderBy('start_time')->get();
 
-        $notes = Note::all();
+    // Ambil catatan yang diupdate dalam 7 hari terakhir
+    $recentNotes = Note::where('updated_at', '>=', now()->subDays(7))->get();
 
-        return view('home', compact('events', 'notes'));
+    // Kirim data ke view
+    return view('home', compact('events', 'recentNotes'));
     }
+
 
     public function store(Request $request)
 {

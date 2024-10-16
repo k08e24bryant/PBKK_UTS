@@ -47,18 +47,20 @@
         </div>
     @endif
 
-    <!-- Section untuk menampilkan semua notes -->
-    <h1 class="text-3xl font-bold text-gray-800 my-6">My Notes</h1>
+    <!-- Section untuk menampilkan catatan terbaru dalam 7 hari -->
+    <h1 class="text-3xl font-bold text-gray-800 my-6">Recently Notes</h1>
 
-    @if($notes->isEmpty())
-        <p class="text-gray-600">Belum ada catatan.</p>
+    @if($recentNotes->isEmpty())
+        <p class="text-gray-600">Belum ada catatan dalam 7 hari terakhir.</p>
     @else
         <div class="grid grid-cols-1 gap-6">
-            @foreach($notes as $note)
+            @foreach($recentNotes as $note)
             <div class="bg-white shadow-lg rounded-lg p-6">
                 <h2 class="text-xl font-semibold text-gray-700">{{ $note->title }}</h2>
                 <p class="text-gray-600 mt-2">{{ $note->content }}</p>
+                <p class="text-gray-500 text-sm">Terakhir diedit: {{ $note->updated_at->format('d M Y H:i') }}</p>
             </div>
+            <hr class="my-2">
             @endforeach
         </div>
     @endif
