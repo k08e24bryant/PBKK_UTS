@@ -51,6 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Saat memilih slot waktu untuk menambah event
         select: function(info) {
+            var now = new Date();
+
+            if (new Date(info.start) < now) {
+                alert('Anda tidak dapat menambah agenda di waktu yang sudah lewat.');
+                return;
+            }  
+            
             var eventName = prompt('Masukkan nama agenda:');
             var eventDescription = prompt('Masukkan deskripsi agenda:');
 

@@ -11,6 +11,9 @@ class EventController extends Controller
 {
     public function dashboard()
     {
+    // Hapus agenda yang sudah lewat
+    Event::where('end_time', '<', now())->delete();
+
     // Ambil semua event dan urutkan berdasarkan tanggal
     $events = Event::orderBy('start_time')->get();
 
@@ -26,15 +29,17 @@ class EventController extends Controller
 {
     Log::info('Request Data:', $request->all());
 
+    // Validasi data, termasuk pengecekan apakah waktu mulai di masa lalu
     $request->validate([
         'name' => 'required|string|max:255',
-        'start_time' => 'required|date',
+        'start_time' => 'required|date|after_or_equal:now',  // Cegah event di masa lalu
         'end_time' => 'required|date|after_or_equal:start_time',
         'category' => 'required|string',
         'color' => 'required|string',
         'description' => 'nullable|string'
     ]);
 
+    // Buat event jika validasi berhasil
     $event = Event::create([
         'name' => $request->name,
         'start_time' => $request->start_time,
@@ -52,10 +57,7 @@ class EventController extends Controller
         return response()->json(['error' => 'Failed to create event'], 500);
     }
 }
-
-
     
-
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
