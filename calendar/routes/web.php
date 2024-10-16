@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NoteController;
 
 Route::get('/', function () {
     return redirect('/home');
@@ -17,3 +18,4 @@ Route::get('/notes', function () {
 Route::get('/events', [EventController::class, 'index']);
 Route::post('/events', [EventController::class, 'store']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
+Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');

@@ -36,14 +36,28 @@
                 </p>
 
                 <div class="flex items-center">
-    <span class="inline-block w-3 h-3 rounded-full mr-2"
-          style="background-color: {{ $event->color ?? '#000000' }};"></span>
-    <span class="text-sm font-semibold text-gray-700">
-        Kategori: {{ ucfirst($event->category) }}
-    </span>
-</div>
+                    <span class="inline-block w-3 h-3 rounded-full mr-2"
+                          style="background-color: {{ $event->color ?? '#000000' }};"></span>
+                    <span class="text-sm font-semibold text-gray-700">
+                        Kategori: {{ ucfirst($event->category) }}
+                    </span>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    @endif
 
+    <!-- Section untuk menampilkan semua notes -->
+    <h1 class="text-3xl font-bold text-gray-800 my-6">My Notes</h1>
 
+    @if($notes->isEmpty())
+        <p class="text-gray-600">Belum ada catatan.</p>
+    @else
+        <div class="grid grid-cols-1 gap-6">
+            @foreach($notes as $note)
+            <div class="bg-white shadow-lg rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-700">{{ $note->title }}</h2>
+                <p class="text-gray-600 mt-2">{{ $note->content }}</p>
             </div>
             @endforeach
         </div>

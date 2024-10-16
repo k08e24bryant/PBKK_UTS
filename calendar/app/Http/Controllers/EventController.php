@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Note;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +14,9 @@ class EventController extends Controller
         // Ambil semua event dan urutkan berdasarkan tanggal
         $events = Event::orderBy('start_time')->get();
 
-        return view('home', compact('events'));
+        $notes = Note::all();
+
+        return view('home', compact('events', 'notes'));
     }
 
     public function store(Request $request)
