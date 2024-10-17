@@ -5,7 +5,7 @@
 **Link Video Presentasi:**
 [Link Presentasi](https://youtu.be/x4PLAThXInQ)
 
-**Link Video Presentasi: FINAL **
+**Link Video Presentasi: FINAL**
 [Link Presentasi FINAL](https://youtu.be/sYBV0-zs4zc)
 
 **Anggota Kelompok:**
