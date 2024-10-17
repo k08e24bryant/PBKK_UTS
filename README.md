@@ -1,6 +1,6 @@
 
 
-# Aplikasi Calendar dengan CRUD Events dan FullCalendar.js
+# Aplikasi Calendar Notes dengan CRUD Events, Menggunakan FullCalendar.js dan ckeditor.js
 
 **Link Video Presentasi:**
 [Link Presentasi](https://youtu.be/x4PLAThXInQ)
