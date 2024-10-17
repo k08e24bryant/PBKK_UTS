@@ -5,6 +5,9 @@
 **Link Video Presentasi:**
 [Link Presentasi](https://youtu.be/x4PLAThXInQ)
 
+**Link Video Presentasi: FINAL **
+[Link Presentasi FINAL](https://youtu.be/sYBV0-zs4zc)
+
 **Anggota Kelompok:**
 - 5025221054 Chalvin Reza Farrel
 - 5025221257 Syarif Sanad
@@ -62,6 +65,14 @@ Aplikasi ini menggunakan tiga tabel utama:
 
 ## Dokumentasi
 ![image](https://github.com/user-attachments/assets/459e3ae7-79f7-4ce1-a3a0-abab4d5400d7)
+![image](https://github.com/user-attachments/assets/e47d61a3-9714-48b7-a194-8fc2e2ef7ee2)
+![image](https://github.com/user-attachments/assets/821fb372-8210-4e36-bcc1-c44b2226cd39)
+![image](https://github.com/user-attachments/assets/1b7d8da2-f5cb-4c43-9a58-1f69b313372b)
+
+
+
+
+
 
 
 
